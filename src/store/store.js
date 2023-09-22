@@ -1,9 +1,20 @@
 import {createStore} from "vuex";
 import auth from "@/store/modules/auth";
+import {LOADING_SPINNER_SHOW_MUTATION} from "@/store/store-constants";
 
 const store = createStore({
     modules: {
         auth,
+    },
+    state() {
+        return {
+            showLoader: false,
+        }
+    },
+    mutations: {
+        [LOADING_SPINNER_SHOW_MUTATION](state, payload) {
+            state.showLoader = payload;
+        }
     }
 })
 

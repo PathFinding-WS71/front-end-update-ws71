@@ -5,9 +5,9 @@
         <template #title> {{ $t("Sign in to UPDate") }}</template>
         <template #content>
           <div class="form-fields">
-            <label for="username" class="block">{{ $t("Username") }}</label>
-            <pv-input-text v-model="username" id="username" type="text" class="w-full"
-                           aria-labelledby="username"></pv-input-text>
+            <label for="email" class="block">{{ $t("Email") }}</label>
+            <pv-input-text v-model="email" id="email" type="text" class="w-full"
+                           aria-labelledby="email"></pv-input-text>
 
             <label for="password" class="block mt-3">{{ $t("Password") }}</label>
             <pv-password v-model="password" id="password" :toggle-mask="true" :feedback="false" class="w-full"
@@ -16,13 +16,13 @@
           <div class="button-container">
             <pv-button type="submit" label="Sign in" class="w-full mt-4"></pv-button>
           </div>
-          <div class="error" v-if="errors.username">{{ errors.username }}</div>
+          <div class="error" v-if="errors.email">{{ errors.email }}</div>
           <div class="error" v-if="errors.password">{{ errors.password }}</div>
 
         </template>
         <template #footer>
           {{ $t("New to UPDate") }}
-          <router-link to="/signup">{{ $t("Create an account") }}</router-link>
+          <router-link class="signup" to="/signup">{{ $t("Create an account") }}</router-link>
         </template>
       </pv-card>
     </div>
@@ -36,7 +36,7 @@ export default {
   name: "login.component",
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       errors: [],
     }
@@ -44,11 +44,11 @@ export default {
   methods: {
     onLogin() {
       let validations = new SignupValidations(
-          this.username, this.password
+          this.email, this.password
       );
 
       this.errors = validations.checkValidations();
-      if ('username' in this.errors || 'password' in this.errors) {
+      if ('email' in this.errors || 'password' in this.errors) {
         return false;
       }
 
@@ -67,5 +67,17 @@ export default {
 
 div.error {
   color: red;
+}
+
+.signup:visited {
+  color: mediumblue;
+}
+.signup {
+  text-decoration: none;
+  color: mediumblue;
+}
+
+.card-container {
+  margin: 170px auto;
 }
 </style>

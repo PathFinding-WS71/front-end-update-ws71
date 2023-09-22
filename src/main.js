@@ -8,6 +8,7 @@ import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import { i18n } from "@/locales/i18n";
 
+import "@/assets/main.css"
 import "primeflex/primeflex.css";
 
 import Toolbar from "primevue/toolbar";

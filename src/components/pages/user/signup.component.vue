@@ -86,7 +86,7 @@
         </template>
         <template #footer>
           {{ $t("Already have an account") }}
-          <router-link to="/login">{{ $t("LogIn") }}</router-link>
+          <router-link class="login" to="/login">{{ $t("LogIn") }}</router-link>
         </template>
       </pv-card>
     </div>
@@ -130,6 +130,7 @@ export default {
         return false;
       }
 
+
       this.signup({email: this.email, password: this.password})
           .catch(error => {
             this.error = error;
@@ -160,4 +161,17 @@ export default {
 div.error {
   color: red;
 }
+
+.login:visited {
+  color: mediumblue;
+}
+.login {
+  text-decoration: none;
+  color: mediumblue;
+}
+
+.card-container {
+  margin: 170px auto;
+}
+
 </style>
