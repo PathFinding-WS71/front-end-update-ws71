@@ -1,23 +1,32 @@
-<script setup>
-import { RouterView } from 'vue-router'
-import Toolbar from "@/components/toolbar.component.vue";
-import Footer from "@/components/footer.component.vue";
-</script>
-
 <template>
-    <header>
-        <Toolbar></Toolbar>
-    </header>
+  <header v-if="$store.state.user">
+    <Toolbar></Toolbar>
 
-    <main>
-        <RouterView />
-    </main>
-
-    <footer>
-        <Footer></Footer>
-    </footer>
-
+  </header>
+  <router-view></router-view>
 </template>
+
+<script>
+import {RouterView} from 'vue-router'
+import {onBeforeMount} from "vue";
+import {useStore} from "vuex";
+import Toolbar from "@/components/shared/toolbar.component.vue";
+export default {
+  setup(){
+    const store = useStore()
+
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
+    })
+
+  },
+  components: {
+    RouterView,
+    Toolbar
+  },
+
+}
+</script>
 
 <style scoped>
 header {
@@ -28,14 +37,15 @@ header {
   width: 100%;
   z-index: 100;
 }
+
 main {
-    margin-top: 185px;
-    margin-bottom: 80px;
+  margin-top: 185px;
+  margin-bottom: 80px;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 </style>

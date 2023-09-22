@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="footer-content">
             <p class="footer-text">Copyright © 2023 PathFinding, inc. {{ $t('All rights reserved') }}.</p>
-            <p class="footer-text"> Aplicaciones Web | SV54. </p>
+            <p class="footer-text"> Diseño de Experimentos | WS71. </p>
         </div>
     </footer>
 </template>

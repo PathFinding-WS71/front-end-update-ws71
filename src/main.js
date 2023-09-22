@@ -8,6 +8,7 @@ import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import { i18n } from "@/locales/i18n";
 
+import "@/assets/main.css"
 import "primeflex/primeflex.css";
 
 import Toolbar from "primevue/toolbar";
@@ -37,12 +38,14 @@ import Message from "primevue/message";
 import DataView from "primevue/dataview";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Tag from "primevue/tag";
+import store from "@/store";
 
 const app = createApp(App);
 
 app.use(PrimeVue, {ripple: true});
 app.use(router);
 app.use(i18n);
+app.use(store);
 
 app.component('pv-toolbar', Toolbar);
 app.component('pv-button', Button);
