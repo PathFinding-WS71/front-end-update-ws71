@@ -1,11 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import Toolbar from "@/components/toolbar.component.vue";
-import Footer from "@/components/footer.component.vue";
+import Toolbar from "@/components/shared/toolbar.component.vue";
+import Footer from "@/components/shared/footer.component.vue";
 </script>
 
 <template>
-    <header>
+    <!--<header>
         <Toolbar></Toolbar>
     </header>
 
@@ -15,8 +15,9 @@ import Footer from "@/components/footer.component.vue";
 
     <footer>
         <Footer></Footer>
-    </footer>
+    </footer>-->
 
+  <router-view></router-view>
 </template>
 
 <style scoped>

@@ -2,8 +2,12 @@
 import {ActivityService} from "@/services/activity.service";
 import {LocationService} from "@/services/location.service";
 import moment from "moment";
+import Toolbar from "@/components/shared/toolbar.component.vue";
+import Footer from "@/components/shared/footer.component.vue";
+
 export default {
   name: "list-activities",
+  components: {Footer, Toolbar},
   data() {
     return {
       activityService: new ActivityService(),
@@ -45,6 +49,10 @@ export default {
 </script>
 
 <template>
+  <header>
+    <Toolbar></Toolbar>
+  </header>
+  <main>
   <div class="activity-list-card">
     <pv-data-view :value="activities" :layout="layout" :paginator="true" :rows="6" :totalRecords="activities.length">
       <template #header>
@@ -101,6 +109,11 @@ export default {
       </template>
     </pv-data-view>
   </div>
+  </main>
+  <footer>
+    <Footer></Footer>
+  </footer>
+
 </template>
 
 <style scoped>
@@ -109,5 +122,25 @@ export default {
   height: 100px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+main {
+  margin-top: 110px;
+  margin-bottom: 80px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 </style>

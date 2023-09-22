@@ -37,12 +37,14 @@ import Message from "primevue/message";
 import DataView from "primevue/dataview";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Tag from "primevue/tag";
+import store from "@/store/store";
 
 const app = createApp(App);
 
 app.use(PrimeVue, {ripple: true});
 app.use(router);
 app.use(i18n);
+app.use(store)
 
 app.component('pv-toolbar', Toolbar);
 app.component('pv-button', Button);
