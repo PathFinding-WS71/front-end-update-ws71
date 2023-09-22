@@ -35,17 +35,9 @@
 
 <script>
 import LogoUPC from "@/assets/Logo UPC - color_bg.png";
-import {useStore} from "vuex";
-import {onBeforeMount} from "vue";
 
 export default {
   name: "toolbar.component",
-  /*setup() {
-    const store = useStore()
-    onBeforeMount(() => {
-      store.dispatch('fetchUser')
-    })
-  },*/
   data() {
     return {
       isMobile: false,

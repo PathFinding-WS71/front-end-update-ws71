@@ -64,10 +64,6 @@ export default {
   padding: 20px;
 }
 
-div.error {
-  color: red;
-}
-
 .signup:visited {
   color: mediumblue;
 }

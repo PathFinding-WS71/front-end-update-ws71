@@ -147,10 +147,6 @@ export default {
   justify-content: center;
 }
 
-div.error {
-  color: red;
-}
-
 .login:visited {
   color: mediumblue;
 }
