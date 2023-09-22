@@ -48,14 +48,14 @@
                              class="w-full" input-class="w-full" aria-labelledby="confirm_password">
                   <template #content>
                     <div
-                        v-if="passwordMatches && password != null"
+                        v-if="passwordMatches && register_form.password != null"
                         class="flex align-items-center"
                     >
                       <i class="pi pi-check mr-2"></i>
                       <p class="">{{ $t("The passwords match") }}.</p>
                     </div>
                     <div
-                        v-else-if="!passwordMatches && password != null"
+                        v-else-if="!passwordMatches && register_form.password != null"
                         class="flex align-items-center"
                     >
                       <i class="pi pi-times mr-2 p-error"></i>
@@ -76,8 +76,11 @@
           </div>
 
           <!--BUTTON: Sign up-->
-          <div class="button-container">
+          <div class="button-container" v-if="passwordMatches && register_form.password != null && register_form.password !== '' ">
             <pv-button type="submit" label="Sign up" class="w-full mt-3"></pv-button>
+          </div>
+          <div class="button-container" v-else>
+            <pv-button :disabled=true type="submit" label="Sign up" class="w-full mt-3"></pv-button>
           </div>
 
         </template>
@@ -115,13 +118,11 @@ export default {
       password: '',
       confirm_password: '',
       birthday: '',
-      errors: [],
-      error: '',
     }
   },
   computed: {
     passwordMatches() {
-      return this.password === this.confirm_password;
+      return this.register_form.password === this.confirm_password;
     },
   },
 
