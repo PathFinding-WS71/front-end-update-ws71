@@ -1,24 +1,21 @@
 <template>
-  <form @submit.prevent="onLogin()">
+  <form @submit.prevent="login">
     <div class="card-container">
       <pv-card class="login-card">
         <template #title> {{ $t("Sign in to UPDate") }}</template>
         <template #content>
           <div class="form-fields">
             <label for="email" class="block">{{ $t("Email") }}</label>
-            <pv-input-text v-model="email" id="email" type="text" class="w-full"
+            <pv-input-text v-model="login_form.email" id="email" type="text" class="w-full"
                            aria-labelledby="email"></pv-input-text>
 
             <label for="password" class="block mt-3">{{ $t("Password") }}</label>
-            <pv-password v-model="password" id="password" :toggle-mask="true" :feedback="false" class="w-full"
+            <pv-password v-model="login_form.password" id="password" :toggle-mask="true" :feedback="false" class="w-full"
                          input-class="w-full" aria-labelledby="password"></pv-password>
           </div>
           <div class="button-container">
             <pv-button type="submit" label="Sign in" class="w-full mt-4"></pv-button>
           </div>
-          <div class="error" v-if="errors.email">{{ errors.email }}</div>
-          <div class="error" v-if="errors.password">{{ errors.password }}</div>
-
         </template>
         <template #footer>
           {{ $t("New to UPDate") }}
@@ -30,31 +27,33 @@
 </template>
 
 <script>
-import SignupValidations from "@/services/signup-validations";
+import {useStore} from "vuex";
+import {ref} from "vue";
 
 export default {
-  name: "login.component",
+  name: "login",
+  setup() {
+    const login_form = ref({});
+    const store = useStore();
+
+    const login = () => {
+      store.dispatch('login', login_form.value);
+    }
+
+    return {
+      login_form,
+      login
+    }
+  },
   data() {
     return {
       email: '',
       password: '',
       errors: [],
+      error: '',
     }
   },
-  methods: {
-    onLogin() {
-      let validations = new SignupValidations(
-          this.email, this.password
-      );
 
-      this.errors = validations.checkValidations();
-      if ('email' in this.errors || 'password' in this.errors) {
-        return false;
-      }
-
-
-    }
-  }
 }
 </script>
 
@@ -72,6 +71,7 @@ div.error {
 .signup:visited {
   color: mediumblue;
 }
+
 .signup {
   text-decoration: none;
   color: mediumblue;

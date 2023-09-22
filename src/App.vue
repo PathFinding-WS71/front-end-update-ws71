@@ -1,23 +1,30 @@
 <template>
+  <header v-if="$store.state.user">
+    <Toolbar></Toolbar>
+
+  </header>
   <router-view></router-view>
-  <loader v-if="showLoader"></loader>
 </template>
 
 <script>
 import {RouterView} from 'vue-router'
-import Loader from "@/components/shared/loader.component.vue"
-import {mapState} from "vuex";
-
+import {onBeforeMount} from "vue";
+import {useStore} from "vuex";
+import Toolbar from "@/components/shared/toolbar.component.vue";
 export default {
+  setup(){
+    const store = useStore()
+
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
+    })
+
+  },
   components: {
     RouterView,
-    Loader,
+    Toolbar
   },
-  computed: {
-    ...mapState({
-      showLoader: state => state.showLoader
-    }),
-  }
+
 }
 </script>
 

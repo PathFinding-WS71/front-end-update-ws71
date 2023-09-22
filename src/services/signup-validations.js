@@ -1,8 +1,7 @@
 import Validations from "@/services/validations";
 
 export default class SignupValidations {
-    constructor(username, password, email = "") {
-        this.username = username;
+    constructor(email, password) {
         this.password = password;
         this.email = email;
     }
@@ -16,18 +15,19 @@ export default class SignupValidations {
         if (!Validations.minLength(this.password, 6)) {
             errors['password'] = 'Password should be of 6 characters';
         }
-
-        if (!Validations.minLength(this.username, 1)) {
-            errors['username'] = 'Password should be of at least 1 character';
-        }
-
         return errors;
     }
 
     static getErrorMessageFromCode(errorCode) {
         switch (errorCode) {
             case 'EMAIL_EXISTS' :
-                return 'Email already exists'
+                return 'Email already exists';
+            case 'EMAIL_NOT_FOUND' :
+                return 'Email not found';
+            case 'INVALID_PASSWORD' :
+                return 'Incorrect password';
+            default:
+                return 'Unexpected error occurred. Please try again';
         }
     }
 }

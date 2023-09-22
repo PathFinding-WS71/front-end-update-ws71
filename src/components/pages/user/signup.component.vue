@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onLogin()">
+  <form @submit.prevent="register">
     <div class="card-container">
       <pv-card class="sign-in-card">
         <template #title> {{ $t("Sign up to UPDate") }}</template>
@@ -9,7 +9,7 @@
               <!--FIELD: E-mail-->
               <div class="field col">
                 <label for="email" class="block">{{ $t("Email") }}</label>
-                <pv-input-text v-model="email" id="email" type="text" class="w-full"
+                <pv-input-text v-model="register_form.email" id="email" type="text" class="w-full"
                                aria-labelledby="email"></pv-input-text>
               </div>
 
@@ -25,7 +25,7 @@
               <!--FIELD: Password-->
               <div class="field col">
                 <label for="password" class="block mt-1">{{ $t("Password") }}</label>
-                <pv-password v-model="password" id="password" :toggle-mask="true" :feedback="true" class="w-full"
+                <pv-password v-model="register_form.password" id="password" :toggle-mask="true" :feedback="true" class="w-full"
                              input-class="w-full" aria-labelledby="password">
                   <template #footer>
                     <p class="text-500 text-s font-medium mb-2">{{ $t("Suggestions") }}</p>
@@ -79,10 +79,7 @@
           <div class="button-container">
             <pv-button type="submit" label="Sign up" class="w-full mt-3"></pv-button>
           </div>
-          <div class="error" v-if="error">{{error}}</div>
-          <div class="error" v-if="errors.email">{{ errors.email }}</div>
-          <div class="error" v-if="errors.username">{{ errors.username }}</div>
-          <div class="error" v-if="errors.password">{{ errors.password }}</div>
+
         </template>
         <template #footer>
           {{ $t("Already have an account") }}
@@ -94,12 +91,23 @@
 </template>
 
 <script>
-import SignupValidations from "@/services/signup-validations";
-import {mapActions} from "vuex";
-import {SIGNUP_ACTION} from "@/store/store-constants";
+import {useStore} from "vuex";
+import {ref} from "vue";
 
 export default {
   name: "signup.component",
+  setup() {
+    const register_form = ref({});
+    const store = useStore();
+
+    const register = () => {
+      store.dispatch('register', register_form.value);
+    }
+    return {
+      register_form,
+      register
+    }
+  },
   data() {
     return {
       email: '',
@@ -116,27 +124,7 @@ export default {
       return this.password === this.confirm_password;
     },
   },
-  methods: {
-    ...mapActions('auth', {
-      signup: SIGNUP_ACTION
-    }),
-    onLogin() {
-      let validations = new SignupValidations(
-          this.username, this.password, this.email
-      );
 
-      this.errors = validations.checkValidations();
-      if ('username' in this.errors || 'password' in this.errors || 'email' in this.errors) {
-        return false;
-      }
-
-
-      this.signup({email: this.email, password: this.password})
-          .catch(error => {
-            this.error = error;
-          });
-    }
-  }
 }
 </script>
 
