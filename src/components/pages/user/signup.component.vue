@@ -6,7 +6,6 @@
         <template #content>
           <div class="form-fields">
             <div class="form-grid grid">
-
               <!--FIELD: E-mail-->
               <div class="field col">
                 <label for="email" class="block">{{ $t("Email") }}</label>
@@ -80,6 +79,7 @@
           <div class="button-container">
             <pv-button type="submit" label="Sign up" class="w-full mt-3"></pv-button>
           </div>
+          <div class="error" v-if="error">{{error}}</div>
           <div class="error" v-if="errors.email">{{ errors.email }}</div>
           <div class="error" v-if="errors.username">{{ errors.username }}</div>
           <div class="error" v-if="errors.password">{{ errors.password }}</div>
@@ -108,6 +108,7 @@ export default {
       confirm_password: '',
       birthday: '',
       errors: [],
+      error: '',
     }
   },
   computed: {
@@ -129,7 +130,10 @@ export default {
         return false;
       }
 
-      this.signup({email: this.email, password: this.password});
+      this.signup({email: this.email, password: this.password})
+          .catch(error => {
+            this.error = error;
+          });
     }
   }
 }

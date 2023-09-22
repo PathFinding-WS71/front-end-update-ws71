@@ -5,7 +5,11 @@ export default {
     namespaced: true,
     state() {
         return {
-            name: 'Yo',
+            token: '',
+            email: '',
+            userId: '',
+            refreshToken: '',
+            expiresIn: '',
         };
     },
     mutations,
