@@ -80,7 +80,7 @@
           <div class="button-container">
             <pv-button type="submit" label="Sign up" class="w-full mt-3"></pv-button>
           </div>
-          <div class="error" v-if="errors.email">{{errors.email}}</div>
+          <div class="error" v-if="errors.email">{{ errors.email }}</div>
           <div class="error" v-if="errors.username">{{ errors.username }}</div>
           <div class="error" v-if="errors.password">{{ errors.password }}</div>
         </template>
@@ -95,6 +95,8 @@
 
 <script>
 import SignupValidations from "@/services/signup-validations";
+import {mapActions} from "vuex";
+import {SIGNUP_ACTION} from "@/store/store-constants";
 
 export default {
   name: "signup.component",
@@ -114,16 +116,20 @@ export default {
     },
   },
   methods: {
+    ...mapActions('auth', {
+      signup: SIGNUP_ACTION
+    }),
     onLogin() {
       let validations = new SignupValidations(
           this.username, this.password, this.email
       );
 
       this.errors = validations.checkValidations();
-      if (this.errors.length) {
+      if ('username' in this.errors || 'password' in this.errors || 'email' in this.errors) {
         return false;
       }
 
+      this.signup({email: this.email, password: this.password});
     }
   }
 }
