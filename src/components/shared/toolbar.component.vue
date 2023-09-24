@@ -23,9 +23,6 @@
           <router-link to="/list-activities">
             <pv-button icon="pi pi-bolt" label="Activities" severity="warning" class="mr-2"/>
           </router-link>
-          <router-link to="/subscription">
-            <pv-button icon="pi pi-credit-card" label="Pricing" severity="success" class="mr-2"/>
-          </router-link>
         </div>
         <pv-button icon="pi pi-sign-out" label="Sign out" severity="danger" class="mr-2" @click="$store.dispatch('logout')"/>
       </div>
