@@ -1,8 +1,8 @@
 <template>
-  <header v-if="$store.state.user">
+  <!--<header v-if="$store.state.user">
     <Toolbar></Toolbar>
 
-  </header>
+  </header>-->
   <router-view></router-view>
 </template>
 
