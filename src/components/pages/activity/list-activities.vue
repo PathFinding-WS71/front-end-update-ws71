@@ -1,53 +1,3 @@
-<script>
-import {ActivityService} from "@/services/activity.service";
-import {LocationService} from "@/services/location.service";
-import moment from "moment";
-import Toolbar from "@/components/shared/toolbar.component.vue";
-import Footer from "@/components/shared/footer.component.vue";
-
-export default {
-  name: "list-activities",
-  components: {Footer, Toolbar},
-  data() {
-    return {
-      activityService: new ActivityService(),
-      locationService: new LocationService(),
-      activities: [],
-      locations: [],
-      layout: 'grid',
-    }
-  },
-  mounted() {
-    this.activityService.getActivities().then((response) => {
-      this.activities = response.data;
-      this.activities.forEach((activity) => {
-        activity.activityDate = moment(activity.activityDate).format("dddd, D MMMM, YYYY");
-      });
-
-      const LocationPromises = this.activities.map((activity) => {
-        return this.locationService.getLocationById(activity.locationId);
-      });
-
-      Promise.all(LocationPromises).then((locationResponse) => {
-        this.locations = locationResponse.map((response) => response.data);
-
-        this.activities.forEach((activity) => {
-          const location = this.locations.find((location) => location.id === activity.locationId);
-          activity.locationImageUrl = location ? location.locationImageUrl : "";
-        });
-      }).catch((error) => {
-        console.log(error);
-      });
-    }).catch((error) => {
-      console.log(error);
-    });
-  },
-  methods: {
-
-  }
-}
-</script>
-
 <template>
   <header>
     <Toolbar></Toolbar>
@@ -58,7 +8,7 @@ export default {
       <template #header>
         <div class="flex flex-wrap align-items-center justify-content-between gap-2">
           <span class="text-xl text-900 font-bold">{{ $t('CurrentActivities') }}</span>
-          <router-link to="new-activity">
+          <router-link to="/new-activity">
             <pv-button icon="pi pi-plus" rounded raised />
           </router-link>
         </div>
@@ -113,8 +63,54 @@ export default {
   <footer>
     <Footer></Footer>
   </footer>
-
 </template>
+
+<script>
+import {ActivityService} from "@/services/activity.service";
+import {LocationService} from "@/services/location.service";
+import moment from "moment";
+import Toolbar from "@/components/shared/toolbar.component.vue";
+import Footer from "@/components/shared/footer.component.vue";
+
+export default {
+  name: "list-activities",
+  components: {Footer, Toolbar},
+  data() {
+    return {
+      activityService: new ActivityService(),
+      locationService: new LocationService(),
+      activities: [],
+      locations: [],
+      layout: 'grid',
+    }
+  },
+  mounted() {
+    this.activityService.getActivities().then((response) => {
+      this.activities = response.data;
+      this.activities.forEach((activity) => {
+        activity.activityDate = moment(activity.activityDate).format("dddd, D MMMM, YYYY");
+      });
+
+      const LocationPromises = this.activities.map((activity) => {
+        return this.locationService.getLocationById(activity.locationId);
+      });
+
+      Promise.all(LocationPromises).then((locationResponse) => {
+        this.locations = locationResponse.map((response) => response.data);
+
+        this.activities.forEach((activity) => {
+          const location = this.locations.find((location) => location.id === activity.locationId);
+          activity.locationImageUrl = location ? location.locationImageUrl : "";
+        });
+      }).catch((error) => {
+        console.log(error);
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  },
+}
+</script>
 
 <style scoped>
 .activity-image{

@@ -7,6 +7,7 @@ import NotFoundComponent from "@/components/views/not-found.component.vue";
 import HomeComponent from "@/components/views/home.component.vue";
 import ListActivities from "@/components/pages/activity/list-activities.vue";
 import {auth} from "@/firebase";
+import ListCommunity from "@/components/pages/community/list-community.vue";
 
 const routes = [
     { path: '/', redirect: "/home" },
@@ -16,6 +17,7 @@ const routes = [
     { path: '/new-activity', component: NewActivity, meta: {requiresAuth: true}},
     { path: '/list-activities', component: ListActivities, meta: {requiresAuth: true} },
     { path: '/new-community', component: NewCommunity, meta: {requiresAuth: true} },
+    { path: '/list-communities', component: ListCommunity, meta: {requiresAuth: true}},
     { path: '/:catchAll(.*)', component: NotFoundComponent },
 ]
 

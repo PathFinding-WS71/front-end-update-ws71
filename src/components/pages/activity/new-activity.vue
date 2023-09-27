@@ -43,8 +43,12 @@
       </form>
 
       <div class="button-container">
-        <pv-button class="com-button" severity="primary" :label="$t('Create Activity')" @click="handleSubmit()"/>
-        <pv-button class="com-button" severity="danger" outlined :label="$t('Cancel')"/>
+        <router-link to="/list-activities">
+          <pv-button class="com-button" severity="primary" :label="$t('Create Activity')" @click="handleSubmit()"/>
+        </router-link>
+        <router-link to="/list-activities">
+          <pv-button class="com-button" severity="danger" outlined :label="$t('Cancel')"/>
+        </router-link>
       </div>
 
     </pv-panel>
@@ -58,10 +62,11 @@
 import {LocationService} from "@/services/location.service";
 import {ActivityService} from "@/services/activity.service";
 import Footer from "@/components/shared/footer.component.vue";
+import Toolbar from "@/components/shared/toolbar.component.vue"
 
 export default {
   name: "new-activity.vue",
-  components: {Footer},
+  components: {Toolbar, Footer},
   data() {
     return {
       locationService: new LocationService(),
