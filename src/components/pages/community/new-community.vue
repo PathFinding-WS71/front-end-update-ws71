@@ -21,13 +21,13 @@
         <pv-dropdown class="input" v-model="selectedDrop" :options="dropOptions"
                      :placeholder="$t(`Choose your community's privacy`)" aria-labelledby="Choose a category"/>
       </div>
-
+<!--
       <div class="p-field">
         <label for="community-pfp" class="label">{{ $t('Community Profile Picture') }}: </label>
         <pv-toast/>
         <pv-file-upload name="demo[]" url="./upload.php" :multiple="false" accept="image/*" :max-file-size="1000000"/>
       </div>
-
+-->
       <div class="button-container">
         <router-link to="/list-communities">
           <pv-button class="com-button" :label="$t('Create community')" @click="handleSubmit()"/>
