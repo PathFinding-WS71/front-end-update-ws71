@@ -17,7 +17,7 @@
           ></pv-split-button>
         </div>
         <div v-else>
-          <router-link to="/new-community">
+          <router-link to="/list-communities">
             <pv-button icon="pi pi-users" label="Communities" severity="primary" class="mr-2"/>
           </router-link>
           <router-link to="/list-activities">

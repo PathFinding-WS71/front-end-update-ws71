@@ -29,7 +29,12 @@
       </div>
 
       <div class="button-container">
-        <pv-button class="com-button" :label="$t('Create community')"/>
+        <router-link to="/list-communities">
+          <pv-button class="com-button" :label="$t('Create community')" @click="handleSubmit()"/>
+        </router-link>
+        <router-link to="/list-communities">
+          <pv-button class="com-button" severity="danger" outlined :label="$t('Cancel')"/>
+        </router-link>
       </div>
 
     </pv-panel>
@@ -42,18 +47,32 @@
 <script>
 import Toolbar from "@/components/shared/toolbar.component.vue";
 import Footer from "@/components/shared/footer.component.vue";
+import {CommunityService} from "@/services/community.service";
 
 export default {
   name: "new-community",
-  data() {
-    return {
-      selectedDrop: null,
-      dropOptions: ["Public", "Private", "Hidden"],
-    }
-  },
   components: {
     Footer,
     Toolbar,
+  },
+  data() {
+    return {
+      communityService: new CommunityService(),
+      name: "",
+      description: "",
+      selectedDrop: null,
+      dropOptions: ["Public", "Private"],
+    }
+  },
+  methods:{
+    async handleSubmit(){
+      const community = {
+        communityName: this.name,
+        communityDescription: this.description,
+        communityVisibility: this.selectedDrop
+      }
+      await this.communityService.postCommunity(community);
+    }
   }
 }
 </script>
