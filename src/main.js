@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import mitt from 'mitt'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from "primevue/config";
@@ -40,7 +41,10 @@ import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Tag from "primevue/tag";
 import store from "@/store";
 
+const emitter = mitt();
 const app = createApp(App);
+
+app.config.globalProperties.emitter = emitter;
 
 app.use(PrimeVue, {ripple: true});
 app.use(router);
@@ -76,3 +80,4 @@ app.component('pv-tag', Tag);
 app.directive('pv-ripple', Ripple);
 
 app.mount('#app');
+
