@@ -17,7 +17,7 @@ const routes = [
     { path: '/signup', component: SignupComponent },
     { path: '/new-activity', component: NewActivity, meta: {requiresAuth: true}},
     { path: '/list-activities', component: ListActivities, meta: {requiresAuth: true} },
-    { path: '/activity-detail', component: ActivityDetail, meta: {requiresAuth: true} },
+    { path: '/activity-detail/:id', component: ActivityDetail, meta: {requiresAuth: true} },
     { path: '/new-community', component: NewCommunity, meta: {requiresAuth: true} },
     { path: '/list-communities', component: ListCommunity, meta: {requiresAuth: true}},
     { path: '/:catchAll(.*)', component: NotFoundComponent },

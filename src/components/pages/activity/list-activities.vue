@@ -54,8 +54,8 @@
               </div>
               <div class="flex align-items-center justify-content-between">
                 <span class="text-l font-semibold">{{ slotProps.data.activityDate }}</span>
-                <router-link to="/activity-detail">
-                  <pv-button rounded label="Detail" severity="warning" :disabled="slotProps.data.isActive === false" @click="selectActivity(activities.at(slotProps.index))"/>
+                <router-link :to="`/activity-detail/${slotProps.data.id}`">
+                  <pv-button rounded label="Detail" severity="warning" :disabled="slotProps.data.isActive === false"/>
                 </router-link>
               </div>
             </div>
@@ -112,12 +112,6 @@ export default {
     }).catch((error) => {
       console.log(error);
     });
-  },
-  methods: {
-    selectActivity(activity) {
-      console.log("Selected activity:", activity);
-      this.emitter.emit('activity-selected', activity);
-    },
   },
 }
 </script>

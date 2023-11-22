@@ -39,7 +39,11 @@ import Message from "primevue/message";
 import DataView from "primevue/dataview";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Tag from "primevue/tag";
+import Fieldset from "primevue/fieldset";
+import ConfirmDialog from "primevue/confirmdialog";
 import store from "@/store";
+import ConfirmationService from "primevue/confirmationservice";
+import ToastService from "primevue/toastservice";
 
 const emitter = mitt();
 const app = createApp(App);
@@ -47,10 +51,14 @@ const app = createApp(App);
 app.config.globalProperties.emitter = emitter;
 
 app.use(PrimeVue, {ripple: true});
+app.use(ConfirmationService);
+app.use(ToastService);
 app.use(router);
 app.use(i18n);
 app.use(store);
 
+app.component('pv-confirm-dialog', ConfirmDialog);
+app.component('pv-fieldset', Fieldset);
 app.component('pv-toolbar', Toolbar);
 app.component('pv-button', Button);
 app.component("pv-checkbox", Checkbox);
