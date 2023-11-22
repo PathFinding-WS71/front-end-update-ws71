@@ -8,6 +8,7 @@ import HomeComponent from "@/components/views/home.component.vue";
 import ListActivities from "@/components/pages/activity/list-activities.vue";
 import {auth} from "@/firebase";
 import ListCommunity from "@/components/pages/community/list-community.vue";
+import HelpComponent from "@/components/pages/extra/help.vue";
 
 const routes = [
     { path: '/', redirect: "/home" },
@@ -18,6 +19,7 @@ const routes = [
     { path: '/list-activities', component: ListActivities, meta: {requiresAuth: true} },
     { path: '/new-community', component: NewCommunity, meta: {requiresAuth: true} },
     { path: '/list-communities', component: ListCommunity, meta: {requiresAuth: true}},
+    { path: '/help', component: HelpComponent, meta: {requiresAuth: true}},
     { path: '/:catchAll(.*)', component: NotFoundComponent },
 ]
 
