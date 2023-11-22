@@ -1,23 +1,26 @@
-<script setup>
-import { RouterView } from 'vue-router'
-import Toolbar from "@/components/toolbar.component.vue";
-import Footer from "@/components/footer.component.vue";
-</script>
-
 <template>
-    <header>
-        <Toolbar></Toolbar>
-    </header>
-
-    <main>
-        <RouterView />
-    </main>
-
-    <footer>
-        <Footer></Footer>
-    </footer>
-
+  <router-view></router-view>
 </template>
+
+<script>
+import {RouterView} from 'vue-router'
+import {onBeforeMount} from "vue";
+import {useStore} from "vuex";
+export default {
+  setup(){
+    const store = useStore()
+
+    onBeforeMount(() => {
+      store.dispatch('fetchUser')
+    })
+
+  },
+  components: {
+    RouterView,
+  },
+
+}
+</script>
 
 <style scoped>
 header {
@@ -28,14 +31,15 @@ header {
   width: 100%;
   z-index: 100;
 }
+
 main {
-    margin-top: 185px;
-    margin-bottom: 80px;
+  margin-top: 185px;
+  margin-bottom: 80px;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 </style>
