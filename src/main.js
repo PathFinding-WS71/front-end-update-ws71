@@ -38,6 +38,8 @@ import Message from "primevue/message";
 import DataView from "primevue/dataview";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Tag from "primevue/tag";
+import Fieldset from "primevue/fieldset";
+import ConfirmDialog from "primevue/confirmdialog";
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
 import store from "@/store";
@@ -51,6 +53,8 @@ app.use(store);
 
 app.component('pv-accordion', Accordion);
 app.component('pv-accordion-tab', AccordionTab);
+app.component('pv-confirm-dialog', ConfirmDialog);
+app.component('pv-fieldset', Fieldset);
 app.component('pv-toolbar', Toolbar);
 app.component('pv-button', Button);
 app.component("pv-checkbox", Checkbox);
@@ -80,3 +84,4 @@ app.component('pv-tag', Tag);
 app.directive('pv-ripple', Ripple);
 
 app.mount('#app');
+

@@ -1,8 +1,4 @@
 <template>
-  <!--<header v-if="$store.state.user">
-    <Toolbar></Toolbar>
-
-  </header>-->
   <router-view></router-view>
 </template>
 
@@ -10,7 +6,6 @@
 import {RouterView} from 'vue-router'
 import {onBeforeMount} from "vue";
 import {useStore} from "vuex";
-import Toolbar from "@/components/shared/toolbar.component.vue";
 export default {
   setup(){
     const store = useStore()
@@ -22,7 +17,6 @@ export default {
   },
   components: {
     RouterView,
-    Toolbar
   },
 
 }
