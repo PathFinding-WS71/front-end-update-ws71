@@ -17,6 +17,9 @@
           ></pv-split-button>
         </div>
         <div v-else>
+          <router-link to="/help">
+            <pv-button icon="pi pi-question-circle" label="Help" severity="info" class="mr-2"></pv-button>
+          </router-link>
           <router-link to="/list-communities">
             <pv-button icon="pi pi-users" label="Communities" severity="primary" class="mr-2"/>
           </router-link>
@@ -24,7 +27,8 @@
             <pv-button icon="pi pi-bolt" label="Activities" severity="warning" class="mr-2"/>
           </router-link>
         </div>
-        <pv-button icon="pi pi-sign-out" label="Sign out" severity="danger" class="mr-2" @click="$store.dispatch('logout')"/>
+        <pv-button icon="pi pi-sign-out" label="Sign out" severity="danger" class="mr-2"
+                   @click="$store.dispatch('logout')"/>
       </div>
     </template>
   </pv-toolbar>
