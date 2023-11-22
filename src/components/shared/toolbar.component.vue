@@ -26,6 +26,9 @@
           <router-link to="/list-activities">
             <pv-button icon="pi pi-bolt" label="Activities" severity="warning" class="mr-2"/>
           </router-link>
+          <router-link to="/list-locations">
+            <pv-button icon="pi pi-map-marker" label="Locations" severity="secondary" class="mr-2"/>
+          </router-link>
         </div>
         <pv-button icon="pi pi-sign-out" label="Sign out" severity="danger" class="mr-2"
                    @click="$store.dispatch('logout')"/>
@@ -57,6 +60,11 @@ export default {
           label: "Activities",
           icon: "pi pi-bolt",
           command: () => this.navigateTo("/list-activities")
+        },
+        {
+          label: "Locations",
+          icon: "pi pi-map-marker",
+          command: () => this.navigateTo("/list-locations")
         },
         {
           label: "Pricing",
