@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import mitt from 'mitt'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from "primevue/config";
@@ -41,22 +40,19 @@ import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Tag from "primevue/tag";
 import Fieldset from "primevue/fieldset";
 import ConfirmDialog from "primevue/confirmdialog";
+import Accordion from "primevue/accordion";
+import AccordionTab from "primevue/accordiontab";
 import store from "@/store";
-import ConfirmationService from "primevue/confirmationservice";
-import ToastService from "primevue/toastservice";
 
-const emitter = mitt();
 const app = createApp(App);
 
-app.config.globalProperties.emitter = emitter;
-
 app.use(PrimeVue, {ripple: true});
-app.use(ConfirmationService);
-app.use(ToastService);
 app.use(router);
 app.use(i18n);
 app.use(store);
 
+app.component('pv-accordion', Accordion);
+app.component('pv-accordion-tab', AccordionTab);
 app.component('pv-confirm-dialog', ConfirmDialog);
 app.component('pv-fieldset', Fieldset);
 app.component('pv-toolbar', Toolbar);
